@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,19 +8,25 @@ public class RandomNumberDoWhileLoop {
         int randomNumber = rand.nextInt(20) + 1;
         int guesses = 3;
         System.out.println("Guess a number between 1 to 20: ");
+
         Scanner scan = new Scanner(System.in);
 
         do {
-            int guess = scan.nextInt();
-            guesses--;
+            try {
+                int guess = scan.nextInt();
+                guesses--;
 
-            if (guess == randomNumber) {
-                System.out.println("Congrats!");
-            } else if (guesses > 0) {
-                System.out.println("Wrong guess.Only " + guesses + " guesses left!");
-                System.out.println("Guess again: ");
-            } else {
-                System.out.println("Number was: " + randomNumber);
+                if (guess == randomNumber) {
+                    System.out.println("Congrats!");
+                } else if (guesses > 0) {
+                    System.out.println("Wrong guess.Only " + guesses + " guesses left!");
+                    System.out.println("Guess again: ");
+                } else {
+                    System.out.println("Number was: " + randomNumber);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Only integer values are accepted.");
+                scan.nextLine();
             }
         } while (guesses > 0);
     }
